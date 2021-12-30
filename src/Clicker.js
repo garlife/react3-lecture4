@@ -1,32 +1,40 @@
 import React, { Component } from 'react';
-import './style.css';
 
 class Clicker extends Component {
   constructor(props) {
     super(props);
-    this.increment = this.increment.bind(this);
+    this.onClickUp = this.onClickUp.bind(this);
+
+    this.state = {
+      count: 0,
+    };
   }
-  counter = 0;
-  increment() {
-    console.log(this.counter);
-    this.counter++;
+
+  onClickUp() {
+    console.log('test up');
+    //   this.state.count++
+    this.setState((prevState) => {
+      return { count: prevState.count + 1 };
+    });
+    console.log(this.state.count);
   }
-  decrement() {
-    console.log(this.counter);
-    this.counter--;
+
+  onClickDown() {
+    console.log('test down');
+    //   this.state.count--
+    this.setState({
+      count: this.state.count - 1,
+    });
+    console.log(this.state.count);
   }
+
   render() {
     return (
-      <>
-        <button onClick={this.increment}>Нажми меня!</button>
-        <button
-          onClick={() => {
-            this.decrement();
-          }}
-        >
-          Нажми меня!
-        </button>
-      </>
+      <div>
+        <button onClick={this.onClickUp}>UP</button>
+        <h3>{this.state.count}</h3>
+        <button onClick={() => this.onClickDown()}>DOWN</button>
+      </div>
     );
   }
 }
